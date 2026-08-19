@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>latest</LangVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <!-- NU1900 signale que NuGet n'a pas pu joindre un flux pour l'audit de vulnérabilités.
+             C'est une panne réseau, pas un défaut du code : elle ne doit pas casser le build. -->
+        <WarningsNotAsErrors>NU1900</WarningsNotAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package">
+        <PackageId>RazorToastr</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Eonix</Authors>
+        <Company>Eonix</Company>
+        <Product>RazorToastr</Product>
+        <Description>Server-side toastr flash messages for ASP.NET Core Razor Pages. Queue success, error, info or warning toasts from any page handler; they survive the redirect via TempData and render on the next request, without a single inline script.</Description>
+        <PackageTags>toastr;razor-pages;aspnetcore;notifications;flash-messages;tempdata;csp</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/eonixmons/RazorToastr</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Tag helpers, TempData et PageModel viennent du framework partagé : une référence de
+             framework plutôt qu'un PackageReference, pour ne rien imposer à l'hôte. -->
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Le README du dépôt sert aussi de page de présentation sur le flux NuGet. -->
+        <None Include="../../README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="RazorToastr.Tests" />
+    </ItemGroup>
+
+</Project>
